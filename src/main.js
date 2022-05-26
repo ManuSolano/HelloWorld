@@ -22,11 +22,34 @@ import '@ionic/vue/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyC1t_qiXIU4YPeVbaHiEqBSSsYgax3S42M",
+  authDomain: "ionic-cbf20.firebaseapp.com",
+  projectId: "ionic-cbf20",
+  storageBucket: "ionic-cbf20.appspot.com",
+  messagingSenderId: "528796522705",
+  appId: "1:528796522705:web:195c0d0e3261ddbc9dcdf0",
+  measurementId: "G-VSXCPGGMS8"
+};
+
+// Initialize Firebase
+const appFirebase = initializeApp(firebaseConfig);
+
 
 const app = createApp(App)
   .use(IonicVue)
-  .use(router);
+  .use(router)
+  .use(appFirebase);
   
 router.isReady().then(() => {
   app.mount('#app');
 });
+
