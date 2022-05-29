@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Tab 1</ion-title>
+        <ion-title>Claves</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
@@ -49,7 +49,7 @@ IonRow,
 } from "@ionic/vue";
 import { getDatabase, ref, onValue } from "firebase/database";
 export default {
-name: "Tab1Page",
+name: "Tab2Page",
 components: {
 IonHeader,
 IonToolbar,
@@ -62,22 +62,24 @@ IonRow,
 },
 mounted() {
 const db = getDatabase();
-const starCountRef = ref(db, "claves/");
+const starCountRef = ref(db, "clavesQR/");
 onValue(starCountRef, (snapshot) => {
 const data = snapshot.val();
 console.log(data);
 var cont = 0
 snapshot.forEach(element => {
+
 this.listaKeys[cont]=element.key
 this.listaClaves[cont] = element.toJSON()
 cont++
 });
 });
-console.log("lista de claves", this.listaCaves)
 },
 data(){ return{
-listaClaves: [{status:"", usuario:""}],
-listaKeys:[]
+listaClaves: [{usuario:''}],
+listaKeys:[],
+listaApe:[],
+listaCar:[]
 }}
 };
 </script>

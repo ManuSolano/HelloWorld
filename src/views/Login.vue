@@ -2,36 +2,27 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Agregar Claves</ion-title>
+        <ion-title>Tab 3</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
-      <ion-row class="ion-justify-content-center">
-    <ion-col size="3">
-        <ion-item>
-            
-            <ion-input placeholder="Clave" type="text" id="input"></ion-input>
-          </ion-item>
-    </ion-col>
-    
-  </ion-row>
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Claves</ion-title>
+          <ion-title size="large">Tab 3</ion-title>
         </ion-toolbar>
       </ion-header>
-      
-
-      <ion-row class="ion-justify-content-center">
-    <ion-col size="2">
-        
-            <ion-button expand="block" @click="agregarClaves()"
-      >Agregar claves</ion-button>
-          
-    </ion-col>
-    
-  </ion-row>
-      
+      <ion-item>
+        <ion-label>Número de claves nuevas</ion-label>
+        <ion-input
+        Type="number"
+        min="1"
+        :value="claves"
+        @ionInput="claves = parseInt($event.target.value)"
+        ></ion-input>
+      </ion-item>
+      <ion-button expand="block" @click="agregarClaves()"
+      >Agregar claves</ion-button
+      >
       <alert-controller></alert-controller>
       <ExploreContainer name="Tab 3 page" />
     </ion-content>
@@ -49,9 +40,9 @@ alertController,
 IonButton,
 IonItem,
 IonInput,
-
+IonLabel,
 } from "@ionic/vue";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, push } from "firebase/database";
 export default {
 name: "Tab3Page",
 components: {
@@ -64,7 +55,7 @@ alertController,
 IonButton,
 IonItem,
 IonInput,
-
+IonLabel,
 },
 data() {
 return {
@@ -76,11 +67,10 @@ async agregarClaves() {
 const db = getDatabase();
 var i;
 var errores = 0;
-
 for (i = 0; i < this.claves; i++) {
-set(ref(db, "clavesQR/"+document.getElementById("input").value), {
-status: "o",
-
+push(ref(db, "claves/"), {
+status: "",
+usuario: "",
 })
 .then(async () => {
 // Data saved successfully!
@@ -90,7 +80,6 @@ console.log(error);
 errores++;
 });
 }
-document.getElementById("input").value=''
 if (errores > 0) {
 const alert = await alertController.create({
 cssClass: "clase claves no agregadas",
