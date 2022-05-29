@@ -74,10 +74,8 @@ claves: 1,
 methods: {
 async agregarClaves() {
 const db = getDatabase();
-var i;
-var errores = 0;
 
-for (i = 0; i < this.claves; i++) {
+var errores = 0;
 set(ref(db, "clavesQR/"+document.getElementById("input").value), {
 status: "o",
 
@@ -89,14 +87,14 @@ status: "o",
 console.log(error);
 errores++;
 });
-}
+
 document.getElementById("input").value=''
 if (errores > 0) {
 const alert = await alertController.create({
 cssClass: "clase claves no agregadas",
 header: "Claves NO agregadas",
 subHeader: "Error",
-message: "No se agregagor las claves",
+message: "No se agregagon las claves",
 buttons: ["Aceptar"],
 });
 await alert.present();

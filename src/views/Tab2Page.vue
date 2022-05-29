@@ -61,9 +61,10 @@ console.log(data);
 var cont = 0
 snapshot.forEach(element => {
 
-this.listaApe[cont]=element.child('apellido')
-this.listaKeys[cont]=element.child('nombre')
-this.listaCar[cont]=element.child('carrera')
+
+this.listaApe[cont]=element.child('apellido').val()
+this.listaKeys[cont]=element.child("nombre").val()
+this.listaCar[cont]=element.child('carrera').val()
 this.listaClaves[cont] = element.toJSON()
 cont++
 });
