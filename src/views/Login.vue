@@ -30,7 +30,7 @@
       </ion-row>
       <ion-row class="ion-justify-content-center">
         <ion-col size="4">
-          <ion-button expand="block" @click="agregarClaves()" href="tabs/tab1" >Iniciar Sesión</ion-button>
+          <ion-button expand="block" @click="agregarClaves()" href="/tabs/tab1">Iniciar Sesión</ion-button>
           <alert-controller></alert-controller>
         </ion-col>
       </ion-row>
@@ -40,6 +40,8 @@
 
 
 <script>
+
+
 import {
   IonPage,
   IonHeader,
@@ -53,6 +55,7 @@ import {
 } from "@ionic/vue";
 import { useRouter } from "vue-router";
 export default {
+
   name: "Login-Page",
   components: {
     IonHeader,
@@ -67,7 +70,13 @@ export default {
   },
 setup() {
       const router = useRouter();
-      return { router };
+     const end = () => {
+      // something to do.
+      return router.push({ name: 'tab1'});
+    };
+    return {
+      end,
+    }
     },
   data() {
     return {
@@ -84,11 +93,14 @@ setup() {
           header: "Inicio de sesión exitoso",
           buttons: ["Aceptar"],
         });
-        //router.push('/detail')
         await alert.present();
       }
     },
   },
 };
+
+
+
+
 </script>
 
